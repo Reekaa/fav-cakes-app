@@ -1,0 +1,14 @@
+.cake-list {
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 16px; 
+    justify-content: center; 
+    padding: 16px;
+  }
+  
+  @media (min-width: 1200px) {
+    .cake-list {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+  }
