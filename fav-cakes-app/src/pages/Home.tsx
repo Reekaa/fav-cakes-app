@@ -2,29 +2,50 @@ import React, { useEffect, useState } from "react";
 import { getCakes } from "../api/cake";
 import { Cake } from "../types/cake";
 import CakeCard from "../components/CakeCard";
-import "../components/CakeCard.css";
-import "../components/CakeList.css"
+import { Container, Typography, Grid2, CircularProgress } from "@mui/material";
 
 const Home: React.FC = () => {
   const [cakes, setCakes] = useState<Cake[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    getCakes().then(setCakes).catch(() => alert("Failed to load cakes!"));
+    getCakes()
+      .then((data) => {
+        setCakes(data);
+        setLoading(false);
+      })
+      .catch(() => {
+        alert("Failed to load cakes!");
+        setLoading(false);
+      });
   }, []);
 
   return (
-    <div className="container">
-      <h1>Favorite Cakes</h1>
-      <div className="cake-list">
-        {cakes.length > 0 ? (
-          cakes.map((cake) => (
-            <CakeCard key={cake.id} name={cake.name} imageUrl={cake.imageUrl} />
-          ))
-        ) : (
-         <p>No cakes added yet.</p> // This should never happen as we load sample data to the db
-        )}
-      </div>
-    </div>
+    <Container maxWidth="lg">
+      <Typography variant="h3" gutterBottom align="center" color="text.primary">
+        Favorite Cakes
+      </Typography>
+      
+      {loading ? (
+        <div style={{ textAlign: "center" }}>
+          <CircularProgress />
+        </div>
+      ) : (
+        <Grid2 container spacing={4} justifyContent="center">
+          {cakes.length > 0 ? (
+            cakes.map((cake) => (
+                <Grid2 key={cake.id}>
+                    <CakeCard key={cake.id} name={cake.name} imageUrl={cake.imageUrl} />
+                </Grid2>
+            ))
+          ) : (
+            <Typography variant="h6" align="center">
+              No cakes added yet.
+            </Typography>
+          )}
+        </Grid2>
+      )}
+    </Container>
   );
 };
 

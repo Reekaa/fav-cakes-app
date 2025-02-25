@@ -1,5 +1,5 @@
-import React from 'react';
-import "./CakeCard.css";
+import React from "react";
+import { Card, CardContent, Typography } from "@mui/material";
 
 interface CakeCardProps {
   name: string;
@@ -8,10 +8,16 @@ interface CakeCardProps {
 
 const CakeCard: React.FC<CakeCardProps> = ({ name, imageUrl }) => {
   return (
-    <div className="cake-card">
-      <h3 className="cake-card-title">{name}</h3>
-      <h4 className="cake-card-image-text">{imageUrl}</h4>
-    </div>
+    <Card sx={{ maxWidth: 345, borderRadius: 2, boxShadow: 3 }}>
+      <CardContent>
+        <Typography variant="h5" component="div" sx={{ textAlign: "center" }}>
+          {name}
+        </Typography>
+        <Typography variant="h6" component="div" sx={{ textAlign: "center" }}>
+          {imageUrl}
+        </Typography>
+      </CardContent>
+    </Card>
   );
 };
 
