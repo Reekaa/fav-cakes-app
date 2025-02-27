@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import { getCakes } from "../api/cake";
 import { Cake } from "../types/cake";
 import CakeCard from "../components/CakeCard";
-import { Container, Typography, Grid2, CircularProgress } from "@mui/material";
+import { Container, Typography, Button, Grid2, CircularProgress } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const Home: React.FC = () => {
   const [cakes, setCakes] = useState<Cake[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     getCakes()
@@ -20,12 +22,24 @@ const Home: React.FC = () => {
       });
   }, []);
 
+
+  const routeChange = () => {
+    navigate('/create');
+  }
+
   return (
     <Container maxWidth="lg">
       <Typography variant="h3" gutterBottom align="center" color="text.primary">
         Favorite Cakes
       </Typography>
-      
+      <Button
+        variant="contained"
+        color="secondary"
+        onClick={routeChange}
+        sx={{ mb: 4 }}
+      >
+        Add a New Cake
+      </Button>
       {loading ? (
         <div style={{ textAlign: "center" }}>
           <CircularProgress />
