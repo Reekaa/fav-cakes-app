@@ -19,11 +19,47 @@ initDb().then(() => {
   });
 
 // GET all cakes
-app.get("/cakes", async (req, res) => {
+app.get("/api/cakes", async (req, res) => {
   const db = await openDb();
   const cakes = await db.all("SELECT * FROM cakes");
   res.json(cakes);
 });
+
+
+// GET cake by id
+app.get("/api/cakes/:id", async (req, res) => {
+    try {
+        const db = await openDb();
+        const id = req.params.id
+        const cake = await db.get("SELECT * FROM cakes WHERE id = ?", [id]);
+
+        if (!cake) {
+            return res.status(404).json({ error: "Cake not found" });
+        }
+        res.json(cake);
+    } catch (error) {
+        console.error("Error fetching cake:", error);
+        res.status(500).json({ error: "Internal Server Error" });
+      }
+  });
+
+// DELETE cake by id
+app.delete("/api/cakes/:id", async (req, res) => {
+    try {
+        const db = await openDb();
+        const id = req.params.id
+        const deleteResult = await db.run("DELETE FROM cakes WHERE id = ?", [id]);
+        
+        if (deleteResult.changes === 0) {
+            return res.status(404).json({ error: "Cake not found" });
+        }
+
+        res.status(200).json({ message: "Cake deleted successfully" });
+    } catch (error) {
+        console.error("Error deleting cake:", error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+  });
 
 const validator = [
     check('name')
@@ -45,7 +81,7 @@ const validator = [
   ];
 
 // POST cakes
-app.post("/cakes", validator, async (req, res) => {
+app.post("api/cakes", validator, async (req, res) => {
   const errors = validationResult(req);
   
   if (!errors.isEmpty()) {

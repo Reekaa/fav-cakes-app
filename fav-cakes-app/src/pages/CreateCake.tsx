@@ -125,6 +125,7 @@ const navigate = useNavigate();
                                     },
                                     '& .MuiOutlinedInput-root.Mui-focused': {
                                       '& fieldset': {
+                                        color: 'black',
                                         borderColor: 'text.primary', // Adjust the border color when focused
                                       },
                                     },
@@ -260,7 +261,7 @@ const navigate = useNavigate();
                         type="submit"
                         color="primary"
                         variant="contained"
-                        sx={{ mt: 3, mb: 2, mr: 2, width: '150px' }}
+                        sx={{ ml: 2, mt: 3, mb: 2, mr: 2, width: '150px' }}
                     >
                         Add Cake
                     </Button>
@@ -268,7 +269,7 @@ const navigate = useNavigate();
                         type="button"
                         color="primary"
                         variant="contained"
-                        sx={{ mt: 3, mb: 2, width: '150px'}}
+                        sx={{ ml: 2,  mt: 3, mb: 2, mr: 2,  width: '150px' }}
                         onClick={() => {navigate("/")}}
                     >
                         Cancel
