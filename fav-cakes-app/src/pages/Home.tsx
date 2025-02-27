@@ -49,7 +49,7 @@ const Home: React.FC = () => {
           {cakes.length > 0 ? (
             cakes.map((cake) => (
                 <Grid2 key={cake.id}>
-                    <CakeCard key={cake.id} name={cake.name} imageUrl={cake.imageUrl} />
+                    <CakeCard cake={cake} />
                 </Grid2>
             ))
           ) : (
