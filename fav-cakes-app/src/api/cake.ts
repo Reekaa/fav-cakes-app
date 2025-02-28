@@ -18,9 +18,13 @@ export const getCakeById = async (id: number): Promise<Cake> => {
   return response.data;
 };
 
-export const addCake = async (cakeData: Omit<Cake, 'id'>): Promise<Cake> => {
+export const addCake = async (cakeData: Omit<Cake, 'id'>) => {
+  console.log('cakeData', cakeData);
+  
   const response = await apiClient.post<Cake>('/cakes', cakeData);
-  return response.data;
+  console.log('response', response);
+  
+  return response;
 };
 
 // export const updateCake = async (id: number, cakeData: Partial<Cake>): Promise<Cake> => {

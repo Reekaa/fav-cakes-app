@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Container, Typography, Grid2, Button, FormControl, Box, InputLabel, Select, MenuItem, TextField, SelectChangeEvent } from "@mui/material";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { addCake } from "../api/cake";
 
 interface FormState {
     name: string;
@@ -22,7 +22,7 @@ interface FormState {
 const CreateCake: React.FC = () => {
 const [errorMessage, setErrorMessage] = useState<string>('');
 const [formErrors, setFormErrors] = useState<FormErrors>({});
-const [form, setForm] = useState<FormState>({
+const [formValues, setFormValues] = useState<FormState>({
     name: '',
     comment: '',
     imageUrl: '',
@@ -31,15 +31,15 @@ const [form, setForm] = useState<FormState>({
 const navigate = useNavigate();
 
   function handleSelectChange(e: SelectChangeEvent<unknown>) {
-    setForm({
-      ...form,
+    setFormValues({
+      ...formValues,
       yumFactor: e.target.value as number,
     });
   }
 
   function handleInput(e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) {
-    setForm({
-      ...form,
+    setFormValues({
+      ...formValues,
       [e.target.name]: e.target.value,
     });
   }
@@ -50,39 +50,34 @@ const navigate = useNavigate();
     // clear errors
     setFormErrors({});
     let errors: any = {};
-    // Validate the form
-    if (!form.name) errors.name = "Cake's name is required";
+    // Validate the formValues
+    if (!formValues.name) errors.name = "Cake's name is required";
     
-    if (!form.comment) {
+    if (!formValues.comment) {
         errors.comment = "Comment is required";
-    } else if (form.comment.length < 5) {
+    } else if (formValues.comment.length < 5) {
         errors.comment = "Comment must be at least 5 characters long";
-    } else if (form.comment.length > 200) {
+    } else if (formValues.comment.length > 200) {
         errors.comment = "Comment cannot be more than 200 characters";
     }
-    if (!form.imageUrl) errors.imageUrl = "Image URL is required";
-    if (form.yumFactor === 0) errors.yumFactor = "Yum factor is required";
+    if (!formValues.imageUrl) errors.imageUrl = "Image URL is required";
+    if (formValues.yumFactor === 0) errors.yumFactor = "Yum factor is required";
 
     if (Object.keys(errors).length > 0) {
         
         setFormErrors(errors);
         return;
       }
-    
+
     try {
-        const res = await axios.post('http://localhost:3002/cakes', form, {
-            method: 'POST',
-            withCredentials: true,
-            headers: {
-                "Content-Type": "application/json",
-                // 'Authorization': id
-            }
-        });
+        console.log('formValues', formValues);
+        
+        const res = await addCake(formValues);
         if (res.status === 201) {
-            navigate('/');
+          navigate('/');
         }
-    } catch (err: any) {    
-        setErrorMessage(err.response.data.message);
+    } catch (err: any) {
+        setErrorMessage(err.message); 
     }
   }
 
@@ -107,7 +102,7 @@ const navigate = useNavigate();
                                 autoFocus
                                 autoComplete="name"
                                 onChange={handleInput}
-                                value={form.name}
+                                value={formValues.name}
                                 variant="outlined"
                                 error={!!formErrors.name}
                                 helperText={formErrors.name}
@@ -121,11 +116,10 @@ const navigate = useNavigate();
                                       backgroundColor: 'background.default', // Adjust background color if needed
                                     },
                                     '& .MuiInputLabel-root': {
-                                      color: 'text.primary', // Adjust label color
+                                      color: 'black', // Adjust label color
                                     },
                                     '& .MuiOutlinedInput-root.Mui-focused': {
                                       '& fieldset': {
-                                        color: 'black',
                                         borderColor: 'text.primary', // Adjust the border color when focused
                                       },
                                     },
@@ -145,7 +139,7 @@ const navigate = useNavigate();
                                 autoFocus
                                 autoComplete="comment"
                                 onChange={handleInput}
-                                value={form.comment}
+                                value={formValues.comment}
                                 variant="outlined"
                                 error={!!formErrors.comment}
                                 helperText={formErrors.comment}
@@ -159,7 +153,7 @@ const navigate = useNavigate();
                                       backgroundColor: 'background.default', // Adjust background color if needed
                                     },
                                     '& .MuiInputLabel-root': {
-                                      color: 'text.primary', // Adjust label color
+                                      color: 'black', // Adjust label color
                                     },
                                     '& .MuiOutlinedInput-root.Mui-focused': {
                                       '& fieldset': {
@@ -181,7 +175,7 @@ const navigate = useNavigate();
                                 autoFocus
                                 autoComplete="imageUrl"
                                 onChange={handleInput}
-                                value={form.imageUrl}
+                                value={formValues.imageUrl}
                                 variant="outlined"
                                 error={!!formErrors.imageUrl}
                                 helperText={formErrors.imageUrl}
@@ -195,7 +189,7 @@ const navigate = useNavigate();
                                       backgroundColor: 'background.default', // Adjust background color if needed
                                     },
                                     '& .MuiInputLabel-root': {
-                                      color: 'text.primary', // Adjust label color
+                                      color: 'black', // Adjust label color
                                     },
                                     '& .MuiOutlinedInput-root.Mui-focused': {
                                       '& fieldset': {
@@ -221,7 +215,7 @@ const navigate = useNavigate();
                                 backgroundColor: 'background.default', // Adjust background color if needed
                             },
                             '& .MuiInputLabel-root': {
-                                color: 'text.primary', // Adjust label color
+                                color: 'black', // Adjust label color
                             },
                             '& .MuiOutlinedInput-root.Mui-focused': {
                                 '& fieldset': {
@@ -237,7 +231,7 @@ const navigate = useNavigate();
                         required
                         label="Yum Factor"
                         id='yumFactor'
-                        value={form.yumFactor}
+                        value={formValues.yumFactor}
                         onChange={handleSelectChange}
                         onBlur={() => {
                             setFormErrors((prev: FormErrors) => ({ ...prev, yumFactor: '' }));

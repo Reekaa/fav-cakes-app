@@ -32,14 +32,6 @@ const Home: React.FC = () => {
       <Typography variant="h3" gutterBottom align="center" color="text.primary">
         Favorite Cakes
       </Typography>
-      <Button
-        variant="contained"
-        color="secondary"
-        onClick={routeChange}
-        sx={{ mb: 4 }}
-      >
-        Add a New Cake
-      </Button>
       {loading ? (
         <div style={{ textAlign: "center" }}>
           <CircularProgress />
@@ -48,17 +40,26 @@ const Home: React.FC = () => {
         <Grid2 container spacing={4} justifyContent="center">
           {cakes.length > 0 ? (
             cakes.map((cake) => (
-                <Grid2 key={cake.id}>
-                    <CakeCard cake={cake} />
+                <Grid2 key={cake.id} >
+                    <CakeCard cake={cake}/>
                 </Grid2>
             ))
           ) : (
-            <Typography variant="h6" align="center">
+            <Typography variant="h6" align="center" color="text.primary">
               No cakes added yet.
             </Typography>
           )}
         </Grid2>
+
       )}
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={routeChange}
+        sx={{ mb: 4, mt: 3}}
+      >
+        Add a New Cake
+      </Button>
     </Container>
   );
 };
