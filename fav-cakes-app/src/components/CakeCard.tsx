@@ -15,8 +15,19 @@ const CakeCard: React.FC<CakeCardProps> = ({ cake }) => {
   }
   
   return (
-    <Card onClick={handleClick} sx={{ maxWidth: 345, borderRadius: 2, boxShadow: 3 }}>
-      <CardContent>
+    <Card onClick={handleClick} 
+    sx={{ 
+      cursor: 'pointer', 
+      maxWidth: 345, 
+      borderRadius: 2, 
+      boxShadow: 3,
+      '&:hover': {
+        boxShadow: 6,
+        transform: 'scale(1.05)',
+        transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+      },
+    }}>
+      <CardContent sx={{ ml: 2, mt: 3, mb: 2, mr: 2, width: '250px' }}>
         <Typography variant="h5" component="div" sx={{ textAlign: "center" }}>
           {cake.name}
         </Typography>

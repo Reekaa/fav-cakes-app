@@ -60,32 +60,37 @@ const CakeDetail: React.FC = () => {
 
   return (
     <Container>
-      <Card sx={{ maxWidth: 600, margin: "auto" }}>
-        <CardContent>
-          <Typography variant="h4">Name: {cake.name}</Typography>
+      <Card sx={{ maxWidth: 600, height: 'auto', display: 'flex', flexDirection: 'column' , margin: "auto" }}>
+        <CardContent sx={{ flexGrow: 1 }}>
+          <Typography variant="h5">Name: {cake.name}</Typography>
           <Typography variant="body1">Comment: {cake.comment}</Typography>
-          <Typography variant="body1">Image: {cake.imageUrl}</Typography>
+          <Typography variant="body1">Yum Factor: {cake.yumFactor}</Typography>
         </CardContent>
       </Card>
       <Grid2>
       <Typography sx={{ p: 1, color: "red" }}>{errorMessage}</Typography>
       <Button
             type="button"
-            color="error"
             variant="contained"
-            sx={{ ml: 2, mt: 3, mb: 2, mr: 2, width: '150px' }}
-            onClick={handleDeleteClick}
-        >
-            Delete Cake
-        </Button>
-        <Button
-            type="button"
-            color="info"
-            variant="contained"
-            sx={{ ml: 2,  mt: 3, mb: 2, mr: 2,  width: '150px' }}
+            sx={{ ml: 2,  mt: 3, mb: 2, mr: 2,  width: '150px',  backgroundColor: '#A7D7C5', // Override the background color
+              '&:hover': {
+                backgroundColor: '#89BCA1', // Override the hover background color
+              }, }}
             onClick={() => {navigate("/")}}
         >
             Return
+        </Button>
+      <Button
+            type="button"
+            variant="contained"
+            sx={{ ml: 2, mt: 3, mb: 2, mr: 2, width: '150px', backgroundColor: '#FF6B6B', // Override the background color
+              '&:hover': {
+                backgroundColor: '#E63946', // Override the hover background color
+              }
+             }}
+            onClick={handleDeleteClick}
+        >
+            Delete Cake
         </Button>
         <Dialog open={open} onClose={handleClose}>
                 <DialogTitle>Confirm Deletion</DialogTitle>
@@ -93,10 +98,28 @@ const CakeDetail: React.FC = () => {
                     Are you sure you want to delete the cake: <strong>{cake.name}</strong>?
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleClose} color="info" variant="contained">
+                    <Button 
+                      onClick={handleClose}   
+                      sx={{
+                        backgroundColor: '#A7D7C5', // Override the background color
+                        '&:hover': {
+                          backgroundColor: '#89BCA1', // Override the hover background color
+                        },
+                      }} 
+                      variant="contained"
+                    >
                         Cancel
                     </Button>
-                    <Button onClick={handleConfirmDelete} color="error" variant="contained">
+                    <Button 
+                      onClick={handleConfirmDelete} 
+                      sx={{
+                        backgroundColor: '#FF6B6B', // Override the background color
+                        '&:hover': {
+                          backgroundColor: '#E63946', // Override the hover background color
+                        },
+                      }}
+                      variant="contained"
+                    >
                         Delete
                     </Button>
                 </DialogActions>
