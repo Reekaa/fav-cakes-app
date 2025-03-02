@@ -1,11 +1,10 @@
 const { validationResult } = require('express-validator');
-const { getAllCakes, getCakeById, createCake, deleteCakeById } = require('../models/cakeModel');
+const { getAllCakes, getCakeById, createCake, deleteCakeById, updateCakeById } = require('../models/cakeModel');
 
 // Get all cakes
 const getCakes = async (req, res) => {
   try {
     const cakes = await getAllCakes();
-    console.log('-----cakes', cakes);
     res.json(cakes);
   } catch (err) {
     res.status(500).json({ error: 'Failed to retrieve cakes' });
@@ -56,4 +55,26 @@ const removeCake = async (req, res) => {
   }
 };
 
-module.exports = { getCakes, getCake, addCake, removeCake };
+// Update cake by ID
+const updateCake = async (req, res) => {
+    const { id } = req.params;
+    const { name, comment, imageUrl, yumFactor } = req.body;
+  
+    if (!name && !comment && !imageUrl && !yumFactor) {
+        return res.status(400).json({ error: "At least one field is required to update the cake" });
+      }
+  
+    try {
+      const result = await updateCakeById(id, name, comment, imageUrl, yumFactor);
+  
+      if (result.changes === 0) {
+        return res.status(404).json({ error: "Cake not found" });
+      }
+  
+      res.json({ message: "Cake updated successfully" });
+    } catch (err) {
+      res.status(500).json({ error: "Database error on update" });
+    }
+}
+
+module.exports = { getCakes, getCake, addCake, removeCake, updateCake };

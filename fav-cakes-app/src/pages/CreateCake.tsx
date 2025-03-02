@@ -70,8 +70,6 @@ const navigate = useNavigate();
       }
 
     try {
-        console.log('formValues', formValues);
-        
         const res = await addCake(formValues);
         if (res.status === 201) {
           navigate('/');
