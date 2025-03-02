@@ -2,6 +2,7 @@
  * @jest-environment jsdom
  */
 
+import React from 'react'; // Add this import
 import '@testing-library/jest-dom';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { MemoryRouter, useNavigate } from 'react-router-dom'
@@ -23,7 +24,7 @@ const MockCakeCard = () => (
 )
 
 jest.mock('react-router-dom', () => ({
-  ...jest.requireActual('react-router-dom'), // Preserve other exports
+  ...jest.requireActual('react-router-dom'), 
   useNavigate: jest.fn(),
 }));
     
@@ -31,7 +32,6 @@ describe('CakeCard', () => {
   it('renders cake name and imageUrl correctly', () => {
     render(<MockCakeCard />);
     
-
     const cakeName = screen.getByText(/Chocolate Cake/i);
     const cakeImageUrl = screen.getByText(/url1/i);
 
