@@ -25,14 +25,13 @@ const CakeDetail: React.FC = () => {
       navigate(`/edit-cake/${id}`)
   };
 
-
   const handleConfirmDelete = async () => {
       try {
           await deleteCake(cakeId);
           console.log('Cake deleted successfully');
           navigate("/")
-      } catch (error) {
-          console.error('Failed to delete cake:', error);
+      } catch (err: any) {
+          setErrorMessage(err.response.data.error)
           setOpen(false);
       }
   };
@@ -44,9 +43,7 @@ const CakeDetail: React.FC = () => {
         setLoading(false);
       })
       .catch((err) => {
-        console.log('err', err);
-        
-        setErrorMessage(err.response.data.message);
+        setErrorMessage(err.response.data.error);
         setLoading(false);
       })
   }, [id]);
@@ -59,21 +56,17 @@ const CakeDetail: React.FC = () => {
     );
   }
 
-  // if (errorMessage) {
-  //   return <Typography color="error" align="center">{errorMessage}</Typography>;
-  // }
-
   return (
     <Container>
-      <Card sx={{ maxWidth: 600, height: 'auto', display: 'flex', flexDirection: 'column' , margin: "auto" }}>
+      <Typography sx={{ p: 1, color: "red" }}>{errorMessage}</Typography>
+      <Card sx={{ maxWidth: 600, height: 'auto', display: 'flex', flexDirection: 'column' , m: "auto" }}>
         <CardContent sx={{ flexGrow: 1 }}>
-          <Typography variant="h5">Name: {cake.name}</Typography>
+          <Typography variant="h5">{cake.name}</Typography>
           <Typography variant="body1">Comment: {cake.comment}</Typography>
           <Typography variant="body1">Yum Factor: {cake.yumFactor}</Typography>
         </CardContent>
       </Card>
       <Grid2>
-      <Typography sx={{ p: 1, color: "red" }}>{errorMessage}</Typography>
       <Button
             type="button"
             variant="contained"

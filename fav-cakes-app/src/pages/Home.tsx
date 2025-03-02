@@ -6,6 +6,7 @@ import { Container, Typography, Button, Grid2, CircularProgress } from "@mui/mat
 import { useNavigate } from "react-router-dom";
 
 const Home: React.FC = () => {
+  const [errorMessage, setErrorMessage] = useState<string>('');
   const [cakes, setCakes] = useState<Cake[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const navigate = useNavigate();
@@ -16,8 +17,8 @@ const Home: React.FC = () => {
         setCakes(data);
         setLoading(false);
       })
-      .catch(() => {
-        alert("Failed to load cakes!");
+      .catch((err: any) => {
+        setErrorMessage(err.response.data.error);
         setLoading(false);
       });
   }, []);
@@ -32,6 +33,7 @@ const Home: React.FC = () => {
       <Typography variant="h3" gutterBottom align="center" color="text.primary">
         Favorite Cakes
       </Typography>
+      <Typography sx={{ p: 1, color: "red" }}>{errorMessage}</Typography>
       {loading ? (
         <div style={{ textAlign: "center" }}>
           <CircularProgress />
