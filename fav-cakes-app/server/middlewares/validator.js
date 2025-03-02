@@ -29,10 +29,7 @@ const validateCake = Joi.object({
   });
 
   const validateCakeMiddleware = (req, res, next) => {
-    console.log("req", req);
-    
     const { error } = validateCake.validate(req.body);
-    console.log("error", error);
     
     if (error) {
       return res.status(400).json({ message: error.details[0].message });

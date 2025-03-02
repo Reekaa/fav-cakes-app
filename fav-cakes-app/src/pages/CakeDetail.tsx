@@ -21,6 +21,11 @@ const CakeDetail: React.FC = () => {
       setOpen(false); 
   };
 
+  const handleEditClick = () => {
+      navigate(`/edit-cake/${id}`)
+  };
+
+
   const handleConfirmDelete = async () => {
       try {
           await deleteCake(cakeId);
@@ -72,25 +77,36 @@ const CakeDetail: React.FC = () => {
       <Button
             type="button"
             variant="contained"
-            sx={{ ml: 2,  mt: 3, mb: 2, mr: 2,  width: '150px',  backgroundColor: '#A7D7C5', // Override the background color
+            sx={{ ml: 2,  mt: 3, mb: 2, mr: 2,  width: '150px',  backgroundColor: '#A7D7C5',
               '&:hover': {
-                backgroundColor: '#89BCA1', // Override the hover background color
+                backgroundColor: '#89BCA1', 
               }, }}
             onClick={() => {navigate("/")}}
         >
             Return
+      </Button>
+      <Button
+          variant="contained"
+          sx={{ ml: 2,  mt: 3, mb: 2, mr: 2,  width: '150px',  backgroundColor: '#A7D7C5',
+            '&:hover': {
+              backgroundColor: '#89BCA1', 
+            }, }}
+          onClick={handleEditClick}
+      >
+          Edit
         </Button>
       <Button
             type="button"
             variant="contained"
-            sx={{ ml: 2, mt: 3, mb: 2, mr: 2, width: '150px', backgroundColor: '#FF6B6B', // Override the background color
+            sx={{ ml: 2, mt: 3, mb: 2, mr: 2, width: '150px', 
+              backgroundColor: '#FF6B6B',
               '&:hover': {
-                backgroundColor: '#E63946', // Override the hover background color
+                backgroundColor: '#E63946',
               }
              }}
             onClick={handleDeleteClick}
         >
-            Delete Cake
+            Delete
         </Button>
         <Dialog open={open} onClose={handleClose}>
                 <DialogTitle>Confirm Deletion</DialogTitle>
@@ -101,9 +117,9 @@ const CakeDetail: React.FC = () => {
                     <Button 
                       onClick={handleClose}   
                       sx={{
-                        backgroundColor: '#A7D7C5', // Override the background color
+                        backgroundColor: '#A7D7C5',
                         '&:hover': {
-                          backgroundColor: '#89BCA1', // Override the hover background color
+                          backgroundColor: '#89BCA1',
                         },
                       }} 
                       variant="contained"
@@ -113,9 +129,9 @@ const CakeDetail: React.FC = () => {
                     <Button 
                       onClick={handleConfirmDelete} 
                       sx={{
-                        backgroundColor: '#FF6B6B', // Override the background color
+                        backgroundColor: '#FF6B6B', 
                         '&:hover': {
-                          backgroundColor: '#E63946', // Override the hover background color
+                          backgroundColor: '#E63946',
                         },
                       }}
                       variant="contained"
