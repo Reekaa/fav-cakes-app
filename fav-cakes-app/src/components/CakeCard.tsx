@@ -15,7 +15,7 @@ const CakeCard: React.FC<CakeCardProps> = ({ cake }) => {
   }
   
   return (
-    <Card onClick={handleClick} 
+    <Card data-testid='cake-card' onClick={handleClick} 
     sx={{ 
       cursor: 'pointer', 
       maxWidth: 345, 
