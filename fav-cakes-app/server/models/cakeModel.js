@@ -27,18 +27,20 @@ const getCakeById = async (id) => {
 const createCake = async (name, comment, imageUrl, yumFactor) => {
   const db = await openDb();
   try {
-    const existingCake = await db.get('SELECT * FROM cakes WHERE name = ?', [name]);
+    const existingCake = await db.get("SELECT * FROM cakes WHERE name = ?", [
+      name,
+    ]);
     if (existingCake) {
-      throw new Error('Cake with this name already exists');
+      throw new Error("Cake with this name already exists");
     }
 
     await db.run(
-      'INSERT INTO cakes (name, comment, imageUrl, yumFactor) VALUES (?, ?, ?, ?)',
+      "INSERT INTO cakes (name, comment, imageUrl, yumFactor) VALUES (?, ?, ?, ?)",
       [name, comment, imageUrl, yumFactor]
     );
   } catch (err) {
-    console.error('Error creating cake:', err);
-    throw new Error('Failed to create cake');
+    console.error("Error creating cake:", err);
+    throw new Error("Failed to create cake");
   }
 };
 
@@ -52,7 +54,7 @@ const deleteCakeById = async (id) => {
     return result;
   } catch (err) {
     console.error(`Error deleting cake with id ${id}:`, err);
-    throw new Error('Failed to delete cake');
+    throw new Error("Failed to delete cake");
   }
 };
 
@@ -61,7 +63,7 @@ const updateCakeById = async (id, name, comment, imageUrl, yumFactor) => {
   try {
     const fieldsToUpdate = [];
     const values = [];
-    
+
     if (name) {
       fieldsToUpdate.push("name = ?");
       values.push(name);
@@ -78,14 +80,14 @@ const updateCakeById = async (id, name, comment, imageUrl, yumFactor) => {
       fieldsToUpdate.push("yumFactor = ?");
       values.push(yumFactor);
     }
-  
+
     if (fieldsToUpdate.length === 0) {
       throw new Error("No fields to update");
     }
-    
-    const query = `UPDATE cakes SET ${fieldsToUpdate.join(', ')} WHERE id = ?`;
+
+    const query = `UPDATE cakes SET ${fieldsToUpdate.join(", ")} WHERE id = ?`;
     values.push(id);
-    
+
     const result = await db.run(query, values);
     if (result.changes === 0) {
       throw new Error(`Cake with id ${id} not found or no changes made`);
@@ -93,8 +95,14 @@ const updateCakeById = async (id, name, comment, imageUrl, yumFactor) => {
     return result;
   } catch (err) {
     console.error(`Error updating cake with id ${id}:`, err);
-    throw new Error('Failed to update cake');
+    throw new Error("Failed to update cake");
   }
 };
 
-module.exports = { getAllCakes, getCakeById, createCake, deleteCakeById, updateCakeById };
+module.exports = {
+  getAllCakes,
+  getCakeById,
+  createCake,
+  deleteCakeById,
+  updateCakeById,
+};

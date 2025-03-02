@@ -1,11 +1,11 @@
-const sqlite3 = require('sqlite3');
-const { open } = require('sqlite');
+const sqlite3 = require("sqlite3");
+const { open } = require("sqlite");
 
 let db;
 
 const initDb = async () => {
   db = await open({
-    filename: './database/cakes.sqlite',
+    filename: "./database/cakes.sqlite",
     driver: sqlite3.Database,
   });
 

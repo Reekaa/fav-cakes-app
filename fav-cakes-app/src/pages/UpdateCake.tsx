@@ -134,8 +134,10 @@ const UpdateCake: React.FC = () => {
                     ...textFieldStyles.root,
                     "& .MuiOutlinedInput-root": textFieldStyles.background,
                     "& .MuiInputLabel-root": textFieldStyles.label,
-                    "& .MuiOutlinedInput-root.Mui-focused": textFieldStyles.focusedInput,
-                    "& .MuiInputLabel-root.Mui-focused": textFieldStyles.focusedLabel,
+                    "& .MuiOutlinedInput-root.Mui-focused":
+                      textFieldStyles.focusedInput,
+                    "& .MuiInputLabel-root.Mui-focused":
+                      textFieldStyles.focusedLabel,
                     "& .MuiInputBase-input": textFieldStyles.input,
                   }}
                 />
@@ -156,8 +158,10 @@ const UpdateCake: React.FC = () => {
                     ...textFieldStyles.root,
                     "& .MuiOutlinedInput-root": textFieldStyles.background,
                     "& .MuiInputLabel-root": textFieldStyles.label,
-                    "& .MuiOutlinedInput-root.Mui-focused": textFieldStyles.focusedInput,
-                    "& .MuiInputLabel-root.Mui-focused": textFieldStyles.focusedLabel,
+                    "& .MuiOutlinedInput-root.Mui-focused":
+                      textFieldStyles.focusedInput,
+                    "& .MuiInputLabel-root.Mui-focused":
+                      textFieldStyles.focusedLabel,
                     "& .MuiInputBase-input": textFieldStyles.input,
                   }}
                 />
@@ -177,8 +181,10 @@ const UpdateCake: React.FC = () => {
                     ...textFieldStyles.root,
                     "& .MuiOutlinedInput-root": textFieldStyles.background,
                     "& .MuiInputLabel-root": textFieldStyles.label,
-                    "& .MuiOutlinedInput-root.Mui-focused": textFieldStyles.focusedInput,
-                    "& .MuiInputLabel-root.Mui-focused": textFieldStyles.focusedLabel,
+                    "& .MuiOutlinedInput-root.Mui-focused":
+                      textFieldStyles.focusedInput,
+                    "& .MuiInputLabel-root.Mui-focused":
+                      textFieldStyles.focusedLabel,
                     "& .MuiInputBase-input": textFieldStyles.input,
                   }}
                 />
@@ -188,13 +194,15 @@ const UpdateCake: React.FC = () => {
                 fullWidth
                 error={!!formErrors.yumFactor}
                 sx={{
-                    ...textFieldStyles.root,
-                    "& .MuiOutlinedInput-root": textFieldStyles.background,
-                    "& .MuiInputLabel-root": textFieldStyles.label,
-                    "& .MuiOutlinedInput-root.Mui-focused": textFieldStyles.focusedInput,
-                    "& .MuiInputLabel-root.Mui-focused": textFieldStyles.focusedLabel,
-                    "& .MuiInputBase-input": textFieldStyles.input,
-                  }}
+                  ...textFieldStyles.root,
+                  "& .MuiOutlinedInput-root": textFieldStyles.background,
+                  "& .MuiInputLabel-root": textFieldStyles.label,
+                  "& .MuiOutlinedInput-root.Mui-focused":
+                    textFieldStyles.focusedInput,
+                  "& .MuiInputLabel-root.Mui-focused":
+                    textFieldStyles.focusedLabel,
+                  "& .MuiInputBase-input": textFieldStyles.input,
+                }}
               >
                 <InputLabel id="yumFactor-label">Yum Factor</InputLabel>
                 <Select
