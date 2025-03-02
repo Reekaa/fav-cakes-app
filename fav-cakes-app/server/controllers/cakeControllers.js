@@ -37,6 +37,9 @@ const addCake = async (req, res) => {
     await createCake(name, comment, imageUrl, yumFactor);
     res.status(201).json({ message: 'Cake added successfully' });
   } catch (err) {
+    if (err.message === 'Cake with this name already exists') {
+      return res.status(409).json({ error: 'Cake with this name already exists' });
+    }
     res.status(500).json({ error: 'Failed to add cake' });
   }
 };
@@ -57,24 +60,23 @@ const removeCake = async (req, res) => {
 
 // Update cake by ID
 const updateCake = async (req, res) => {
-    const { id } = req.params;
-    const { name, comment, imageUrl, yumFactor } = req.body;
-  
-    if (!name && !comment && !imageUrl && !yumFactor) {
-        return res.status(400).json({ error: "At least one field is required to update the cake" });
-      }
-  
-    try {
-      const result = await updateCakeById(id, name, comment, imageUrl, yumFactor);
-  
-      if (result.changes === 0) {
-        return res.status(404).json({ error: "Cake not found" });
-      }
-  
-      res.json({ message: "Cake updated successfully" });
-    } catch (err) {
-      res.status(500).json({ error: "Database error on update" });
+  const { id } = req.params;
+  const { name, comment, imageUrl, yumFactor } = req.body;
+
+  if (!name && !comment && !imageUrl && !yumFactor) {
+    return res.status(400).json({ error: "At least one field is required to update the cake" });
+  }
+
+  try {
+    const result = await updateCakeById(id, name, comment, imageUrl, yumFactor);
+    if (result.changes === 0) {
+      return res.status(404).json({ error: "Cake not found" });
     }
-}
+
+    res.json({ message: "Cake updated successfully" });
+  } catch (err) {
+    res.status(500).json({ error: "Database error on update" });
+  }
+};
 
 module.exports = { getCakes, getCake, addCake, removeCake, updateCake };
