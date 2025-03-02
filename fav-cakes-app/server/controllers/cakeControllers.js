@@ -1,5 +1,11 @@
-const { validationResult } = require('express-validator');
-const { getAllCakes, getCakeById, createCake, deleteCakeById, updateCakeById } = require('../models/cakeModel');
+const { validationResult } = require("express-validator");
+const {
+  getAllCakes,
+  getCakeById,
+  createCake,
+  deleteCakeById,
+  updateCakeById,
+} = require("../models/cakeModel");
 
 // Get all cakes
 const getCakes = async (req, res) => {
@@ -7,7 +13,7 @@ const getCakes = async (req, res) => {
     const cakes = await getAllCakes();
     res.json(cakes);
   } catch (err) {
-    res.status(500).json({ error: 'Failed to retrieve cakes' });
+    res.status(500).json({ error: "Failed to retrieve cakes" });
   }
 };
 
@@ -21,7 +27,7 @@ const getCake = async (req, res) => {
     }
     res.json(cake);
   } catch (err) {
-    res.status(500).json({ error: 'Failed to fetch cake details' });
+    res.status(500).json({ error: "Failed to fetch cake details" });
   }
 };
 
@@ -35,12 +41,14 @@ const addCake = async (req, res) => {
   const { name, comment, imageUrl, yumFactor } = req.body;
   try {
     await createCake(name, comment, imageUrl, yumFactor);
-    res.status(201).json({ message: 'Cake added successfully' });
+    res.status(201).json({ message: "Cake added successfully" });
   } catch (err) {
-    if (err.message === 'Cake with this name already exists') {
-      return res.status(409).json({ error: 'Cake with this name already exists' });
+    if (err.message === "Cake with this name already exists") {
+      return res
+        .status(409)
+        .json({ error: "Cake with this name already exists" });
     }
-    res.status(500).json({ error: 'Failed to add cake' });
+    res.status(500).json({ error: "Failed to add cake" });
   }
 };
 
@@ -50,11 +58,11 @@ const removeCake = async (req, res) => {
   try {
     const result = await deleteCakeById(id);
     if (result.changes === 0) {
-      return res.status(404).json({ error: 'Cake not found' });
+      return res.status(404).json({ error: "Cake not found" });
     }
-    res.status(200).json({ message: 'Cake deleted successfully' });
+    res.status(200).json({ message: "Cake deleted successfully" });
   } catch (err) {
-    res.status(500).json({ error: 'Failed to delete cake' });
+    res.status(500).json({ error: "Failed to delete cake" });
   }
 };
 
@@ -64,7 +72,9 @@ const updateCake = async (req, res) => {
   const { name, comment, imageUrl, yumFactor } = req.body;
 
   if (!name && !comment && !imageUrl && !yumFactor) {
-    return res.status(400).json({ error: "At least one field is required to update the cake" });
+    return res
+      .status(400)
+      .json({ error: "At least one field is required to update the cake" });
   }
 
   try {

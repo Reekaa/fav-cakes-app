@@ -65,7 +65,7 @@ const CreateCake: React.FC = () => {
     setFormErrors({});
 
     let errors: any = {};
-    
+
     if (!formValues.name) errors.name = "Cake's name is required";
 
     if (!formValues.comment) {
@@ -136,8 +136,10 @@ const CreateCake: React.FC = () => {
                     ...textFieldStyles.root,
                     "& .MuiOutlinedInput-root": textFieldStyles.background,
                     "& .MuiInputLabel-root": textFieldStyles.label,
-                    "& .MuiOutlinedInput-root.Mui-focused": textFieldStyles.focusedInput,
-                    "& .MuiInputLabel-root.Mui-focused": textFieldStyles.focusedLabel,
+                    "& .MuiOutlinedInput-root.Mui-focused":
+                      textFieldStyles.focusedInput,
+                    "& .MuiInputLabel-root.Mui-focused":
+                      textFieldStyles.focusedLabel,
                     "& .MuiInputBase-input": textFieldStyles.input,
                   }}
                 />
@@ -165,8 +167,10 @@ const CreateCake: React.FC = () => {
                     ...textFieldStyles.root,
                     "& .MuiOutlinedInput-root": textFieldStyles.background,
                     "& .MuiInputLabel-root": textFieldStyles.label,
-                    "& .MuiOutlinedInput-root.Mui-focused": textFieldStyles.focusedInput,
-                    "& .MuiInputLabel-root.Mui-focused": textFieldStyles.focusedLabel,
+                    "& .MuiOutlinedInput-root.Mui-focused":
+                      textFieldStyles.focusedInput,
+                    "& .MuiInputLabel-root.Mui-focused":
+                      textFieldStyles.focusedLabel,
                     "& .MuiInputBase-input": textFieldStyles.input,
                   }}
                 />
@@ -193,8 +197,10 @@ const CreateCake: React.FC = () => {
                     ...textFieldStyles.root,
                     "& .MuiOutlinedInput-root": textFieldStyles.background,
                     "& .MuiInputLabel-root": textFieldStyles.label,
-                    "& .MuiOutlinedInput-root.Mui-focused": textFieldStyles.focusedInput,
-                    "& .MuiInputLabel-root.Mui-focused": textFieldStyles.focusedLabel,
+                    "& .MuiOutlinedInput-root.Mui-focused":
+                      textFieldStyles.focusedInput,
+                    "& .MuiInputLabel-root.Mui-focused":
+                      textFieldStyles.focusedLabel,
                     "& .MuiInputBase-input": textFieldStyles.input,
                   }}
                 />
@@ -206,8 +212,10 @@ const CreateCake: React.FC = () => {
                   ...textFieldStyles.root,
                   "& .MuiOutlinedInput-root": textFieldStyles.background,
                   "& .MuiInputLabel-root": textFieldStyles.label,
-                  "& .MuiOutlinedInput-root.Mui-focused": textFieldStyles.focusedInput,
-                  "& .MuiInputLabel-root.Mui-focused": textFieldStyles.focusedLabel,
+                  "& .MuiOutlinedInput-root.Mui-focused":
+                    textFieldStyles.focusedInput,
+                  "& .MuiInputLabel-root.Mui-focused":
+                    textFieldStyles.focusedLabel,
                   "& .MuiInputBase-input": textFieldStyles.input,
                 }}
                 error={!!formErrors.yumFactor}
