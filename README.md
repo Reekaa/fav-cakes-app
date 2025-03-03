@@ -95,8 +95,8 @@ To run the tests for the app (frontend or backend), you can use the following co
 1. Reusable Components (Frontend)
 Goal: Refactor frontend components into reusable, modular pieces.
 
-2. Testing the Backend
-Goal: Implement tests for the backend to ensure reliability.
+2. Non-functional and Performance Testing the Backend
+Goal: Implement tests for the backend to ensure reliability. 
 
 3. Error Handling (Backend)
 Goal: Improve error handling and validation in backend APIs.
@@ -106,5 +106,8 @@ Goal: Write more testing for frontend components.
 
 5. Deployment
 Goal: Deploy the app.
+
+6. API Json Schema
+Goal: Create API json schema
 
 
